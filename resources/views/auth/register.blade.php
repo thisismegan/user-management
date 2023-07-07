@@ -42,21 +42,27 @@
                                         @csrf
                                         <div class="form-group">
                                             <input type="text" name="email" class="form-control form-control-user @if ($errors->has('email')) is-invalid @endif" value="{{ old('email'); }}" placeholder="Silahkan masukkan email">
-                                            @if ($errors->has('email'))
-                                            <small class="text-danger">{{ $errors->first('email') }}</small>
-                                            @endif
+                                           @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                           @enderror
                                         </div>
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control form-control-user @if ($errors->has('name')) is-invalid @endif" value="{{ old('name') }}" placeholder="Silahkan masukkan nama anda">
-                                            @if ($errors->has('name'))
-                                            <small class="text-danger">{{ $errors->first('email') }}</small>
-                                            @endif
+                                           @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                           @enderror
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user @if ($errors->has('password')) is-invalid @endif" placeholder="Masukkan kata sandi">
-                                            @if ($errors->has('password'))
-                                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                                            @endif
+                                           @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                           @enderror
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password_confirmation" class=" form-control form-control-user @if ($errors->has('password')) is-invalid @endif" placeholder="Konfirmasi kata sandi">

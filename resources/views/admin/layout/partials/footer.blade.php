@@ -30,3 +30,17 @@
 <!-- Page level custom scripts -->
 <script src="<?= url('assets') ?>/js/demo/chart-area-demo.js"></script>
 <script src="<?= url('assets') ?>/js/demo/chart-pie-demo.js"></script>
+
+<!-- select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2()
+
+        $('#inputGroupFile02').on('change', function() {
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    });
+</script>

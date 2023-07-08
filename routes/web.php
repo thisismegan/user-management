@@ -13,16 +13,16 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/detail-product/{id}', [HomeController::class, 'detailProduct'])->name('detail-product');
 Route::get('search', [HomeController::class, 'search'])->name('search');
-
-
 Route::get('/login', [AuthController::class, 'index'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('register', [RegisterController::class, 'create'])->name('register-page');
 Route::post('register', [RegisterController::class, 'store'])->name('register');
+
+// protected routes
 Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 
-//route admin
-Route::middleware('auth')->group(function () {
+// protected routes admin and super admin
+Route::middleware('administrator')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('delete-product', [ProductController::class, 'deleteProduct'])->name('delete-product');

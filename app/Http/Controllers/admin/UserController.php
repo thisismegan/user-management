@@ -23,12 +23,13 @@ class UserController extends Controller
 
     public function create()
     {
-
+        $this->authorize('superadmin');
         return view('admin/user/create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('superadmin');
         $request->validate([
             'email' => ['required', 'unique:users', 'email'],
             'name'  => ['required', 'max:30'],
@@ -49,6 +50,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        $this->authorize('superadmin');
         $user = User::join('roles', 'roles.id', '=', 'users.role_id')
             ->select('users.*', 'roles.role_name')
             ->where('users.id', $id)
@@ -61,6 +63,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('superadmin');
         $request->validate([
             'name'  => ['required', 'max:30'],
         ]);
@@ -78,6 +81,8 @@ class UserController extends Controller
 
     public function deleteUser(Request $request)
     {
+        $this->authorize('superadmin');
+
         $user = User::find($request->id);
 
         //cek apakah masih ada pesanan yang belum selesai

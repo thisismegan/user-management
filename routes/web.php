@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\HomeController;
 
 // public routes
-Route::get('/', [AuthController::class, 'index'])->name('login-page');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/login', [AuthController::class, 'index'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('register', [RegisterController::class, 'create'])->name('register-page');
 Route::post('register', [RegisterController::class, 'store'])->name('register');

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\UserController;
 
 // public routes
 Route::get('/', [AuthController::class, 'index'])->name('login-page');
@@ -23,5 +24,7 @@ Route::middleware('auth')->group(function () {
         Route::post('delete-image', [ProductController::class, 'deleteImage'])->name('delete-image');
         Route::resource('category', CategoryController::class)->except(['create', 'show', 'edit', 'destroy']);
         Route::post('delete-category', [CategoryController::class, 'deleteCategory'])->name('delete-category');
+        Route::resource('user', UserController::class)->except('show', 'destroy');
+        Route::post('delete-user', [UserController::class, 'deleteUser'])->name('delete-user');
     });
 });

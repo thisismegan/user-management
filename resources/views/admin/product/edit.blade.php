@@ -40,9 +40,8 @@
                          <div class="form-group">
                              <label>Kategori</label>
                              <select name="category_id" class="form-control">
-                                <option value="{{ $product->category_id }}">{{ $product->category_name }}</option>
                                  @foreach ($categories as $category)
-                                 <option value="{{ $category->id }}"> {{$category->category_name}} </option>
+                                 <option @if($product->category_id == $category->id) selected @endif value="{{ $category->id }}"> {{$category->category_name}} </option>
                                  @endforeach
                              </select>
                              @error('category_id')

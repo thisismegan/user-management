@@ -27,13 +27,13 @@
           Management
       </div>    
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Product Management -->
       <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#product" aria-expanded="true" aria-controls="product">
               <i class="fas fa-fw fa-cog"></i>
               <span>Produk</span>
           </a>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div id="product" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
                   <a class="collapse-item" href="{{ route('product.index') }}">Daftar Produk</a>
                   <a class="collapse-item" href="{{ route('category.index') }}">Kategori</a>
@@ -41,18 +41,31 @@
           </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Order Management -->
       <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#order" aria-expanded="true" aria-controls="order">
               <i class="fas fa-fw fa-wrench"></i>
               <span>Order</span>
           </a>
-          <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div id="order" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
                   <a class="collapse-item" href="utilities-color.html">Colors</a>
                   <a class="collapse-item" href="utilities-border.html">Borders</a>
                   <a class="collapse-item" href="utilities-animation.html">Animations</a>
                   <a class="collapse-item" href="utilities-other.html">Other</a>
+              </div>
+          </div>
+      </li>
+
+       <!-- User maangement -->
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user" aria-expanded="true" aria-controls="user">
+              <i class="fas fa-fw fa-user-alt"></i>
+              <span>User</span>
+          </a>
+          <div id="user" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                  <a class="collapse-item" href="{{ route('user.index') }}">Daftar User</a>
               </div>
           </div>
       </li>

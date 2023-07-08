@@ -21,8 +21,8 @@ Route::middleware('guest')->group(function () {
 });
 
 // protected routes customer
-Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+Route::post('/logout', [AuthController::class, 'destroy'])->name('logout')->middleware('auth');
+Route::middleware('isCustomer')->group(function () {
     Route::resource('cart', CartController::class);
 });
 

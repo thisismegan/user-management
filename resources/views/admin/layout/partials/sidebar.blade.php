@@ -25,7 +25,7 @@
       <!-- Heading -->
       <div class="sidebar-heading">
           Management
-      </div>
+      </div>    
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
@@ -36,7 +36,7 @@
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
                   <a class="collapse-item" href="{{ route('product.index') }}">Daftar Produk</a>
-                  <a class="collapse-item" href="cards.html">Stok Kosong</a>
+                  <a class="collapse-item" href="{{ route('category.index') }}">Kategori</a>
               </div>
           </div>
       </li>

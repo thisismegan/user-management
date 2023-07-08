@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -18,7 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('delete-product', [ProductController::class, 'deleteProduct'])->name('delete-product');
-        Route::resource('product', ProductController::class);
+        Route::resource('product', ProductController::class)->except(['destroy']);
         Route::post('delete-image', [ProductController::class, 'deleteImage'])->name('delete-image');
+        Route::resource('category', CategoryController::class)->except(['create', 'show', 'edit', 'destroy']);
+        Route::post('delete-category', [CategoryController::class, 'deleteCategory'])->name('delete-category');
     });
 });

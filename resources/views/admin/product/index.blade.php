@@ -7,14 +7,14 @@
      <div class="row">
          <div class="col-md-12">
              @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show mt-3 mx-3" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                         {{ session('success') }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     @elseif(session('failed'))
-                    <div class="alert alert-danger alert-dismissible fade show mt-3 mx-3" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                         {{ session('failed') }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

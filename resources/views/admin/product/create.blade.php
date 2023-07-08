@@ -13,7 +13,6 @@
             @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show mt-3 mx-3" role="alert">
                         {{ session('success') }}
-                        <a href="{{route('product.show',$product_id)}}" class="btn btn-primary btn-sm">Lihat</a>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

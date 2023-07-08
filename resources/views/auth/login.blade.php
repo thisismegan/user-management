@@ -1,98 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Login</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="<?= url('assets') ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="<?= url('assets') ?>/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ecommerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <style>
+        .form-signin {
+            max-width: 500px;
+            margin-top: 60px !important;
+            padding: 1rem;
+        }
+    </style>
 </head>
 
-<body class="bg-gradient-primary">
 
+
+<body>
     <div class="container">
-
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-xl-6 col-lg-6 col-md-6">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show mt-3 mx-3" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <div class="w-100 m-auto form-signin">
+            <div class="card p-3">
+                @if(session('success'))
+                 <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ session('success') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    @elseif(session('failed'))
-                    <div class="alert alert-danger alert-dismissible fade show mt-3 mx-3" role="alert">
-                        {{ session('failed') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                 @elseif(session('failed'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ session('failed') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 </div>                  
+                @endif
+                <h4 class="text-center"><b>Form Login</b></h4>
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input name="email" type="text" class="form-control @if ($errors->has('email')) is-invalid @endif" value="{{ old('email'); }}">
+                         @if ($errors->has('email'))
+                            <small class="text-danger">{{ $errors->first('email') }}</small>
+                         @endif
                     </div>
-                    @endif
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Please Login</h1>
-                                    </div>
-                                    <form class="user" method="post" action="login">
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="text" name="email" class="form-control form-control-user @if ($errors->has('email')) is-invalid @endif" value="{{ old('email'); }}" placeholder="Silahkan masukkan email">
-                                            @if ($errors->has('email'))
-                                            <small class="text-danger">{{ $errors->first('email') }}</small>
-                                            @endif
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" name="password" class="form-control form-control-user @if ($errors->has('password')) is-invalid @endif" placeholder="Masukkan kata sandi">
-                                            @if ($errors->has('password'))
-                                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                                            @endif
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                   <div class="mb-3">
+                    <label class="form-label">Kata Sandi</label>
+                        <input name="password" type="password" class="form-control @if ($errors->has('password')) is-invalid @endif">
+                        @if ($errors->has('password'))
+                            <small class="text-danger">{{ $errors->first('password') }}</small>
+                        @endif
                     </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dark">Login</button>
+                    </div>
+                </form>
+                <div>
+                  <div class="float-end">Belum punya akun? <a href="{{route('register-page')}}">Daftar</a></div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?= url('assets') ?>/vendor/jquery/jquery.min.js"></script>
-    <script src="<?= url('assets') ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="<?= url('assets') ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="<?= url('assets') ?>/js/sb-admin-2.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

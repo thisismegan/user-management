@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 
 // public routes
@@ -15,13 +15,16 @@ Route::get('/detail-product/{id}', [HomeController::class, 'detailProduct'])->na
 Route::get('search', [HomeController::class, 'search'])->name('search');
 Route::get('/login', [AuthController::class, 'index'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('register', [RegisterController::class, 'create'])->name('register-page');
-Route::post('register', [RegisterController::class, 'store'])->name('register');
+Route::get('register', [AuthController::class, 'register'])->name('register-page');
+Route::post('register', [AuthController::class, 'store'])->name('register');
 
-// protected routes
-Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+// protected routes customer
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+    Route::resource('cart', CartController::class);
+});
 
-// protected routes admin and super admin
+// protected routes administrator
 Route::middleware('administrator')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

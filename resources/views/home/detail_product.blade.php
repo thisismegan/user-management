@@ -4,6 +4,19 @@
  <!-- detail produk -->
     <div class="container mb-5">
         <div class="row justify-content-start detail-produk">
+            <div class="mx-auto">
+                @if(session('success'))
+                 <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ session('success') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                 @elseif(session('failed'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ session('failed') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 </div>                  
+                @endif
+            </div>
             <div class="col">
                 <div class="card">
                     <div id="carouselExample" class="carousel slide">
@@ -48,13 +61,16 @@
             <div class="col">
                 <div class="card ">
                     <div class="card-body text-center">
-                        <h3><b>Rp{{ number_format($product->price,0,',','.') }}</b></h3>
-                        <div class="input-group mb-2">
-                            <span class="input-group-text">Jumlah</span>
-                            <input type="number" class="form-control text-center" min="1" max="stock" value="1" required>
-                        </div>
-                        <hr>
-                        <form action="">
+                        <h3><b>Rp{{ number_format($product->price,0,'.','.') }}</b></h3>
+                         <form action="{{ route('cart.store') }}" method="POST">
+                            @csrf
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">Jumlah</span>
+                                <input type="number" name="qty" class="form-control text-center" min="1" max="{{ $product->stock }}" value="1" required>
+                            </div>
+                            <hr>
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="max_qty" value="{{ $product->stock }}">
                             <div class="d-grid mb-2">
                                 <button type="submit" class="btn btn-dark">Masukan Keranjang</button>
                             </div>

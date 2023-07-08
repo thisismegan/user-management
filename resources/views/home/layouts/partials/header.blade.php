@@ -77,7 +77,7 @@
                 @if(Auth::check())
                   <ul class="navbar-nav">
                      <li class="nav-item">
-                        <a href="" class="btn btn-dark mx-2"><i class="fas fa-shopping-basket"></i></a>
+                        <a href="{{ route('cart.index') }}" class="btn btn-dark mx-2"><i class="fas fa-shopping-basket"></i></a>
                      </li>
                         <li class="nav-item">
                             <a class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

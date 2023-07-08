@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -26,8 +29,34 @@ class AuthController extends Controller
             }
             return redirect()->route('dashboard');
         } else {
-            return redirect('/')->with('failed', 'Email atau password salah');
+            return redirect()->route('login-page')->with('failed', 'Email atau password salah');
         }
+    }
+
+    public function register()
+    {
+        return view('auth/register');
+    }
+
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'unique:users', 'email'],
+            'name'  => ['required', 'max:30'],
+            'password' => ['required', 'confirmed', Password::min(8)]
+        ]);
+
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => 3,
+            'photo'  => "default.png"
+        ]);
+
+        return redirect()->route('login-page')->with('success', 'akun telah di buat. silahkan login');
     }
 
     public function destroy()

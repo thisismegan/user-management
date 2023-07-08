@@ -25,6 +25,7 @@ class HomeController extends Controller
     {
         $product = Product::join('categories', 'categories.id', '=', 'products.category_id')
             ->where('products.id', $id)
+            ->select('products.*', 'categories.category_name')
             ->first();
         $images = Image::where('product_id', $id)->get();
 

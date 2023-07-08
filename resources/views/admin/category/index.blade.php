@@ -29,6 +29,7 @@
                              <tr>
                                  <th scope="col">No</th>
                                  <th scope="col">Nama Kategori</th>
+                                 <th scope="col">Gambar</th>
                                  <th scope="col">Opsi</th>
                              </tr>
                          </thead>
@@ -37,6 +38,9 @@
                             <tr>
                                  <th scope="row">{{ $i++ }}</th>
                                  <td>{{ $category->category_name }}</td>
+                                 <td>
+                                    <img src="{{ asset('storage/category/'.$category->category_image) }}" width="60px" alt="">
+                                 </td>
                                  <td>
                                   <div class="row">
                                     <button class="btn btn-warning btn-sm mx-2"  data-toggle="modal" data-target="#edit{{ $category->id }}"><i class="fas fa-pencil-alt"></i></button>
@@ -58,7 +62,7 @@
              <div class="card card shadow mb-4">
                  <div class="card-body">
                     <div class="card-title"><b>Tambah Kategori</b></div>
-                      <form method="POST" action="{{ route('category.store') }}">
+                      <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
                          @csrf
                          <div class="form-group">
                              <label>Nama Kategori</label>
@@ -69,6 +73,10 @@
                              </span>
                              @enderror
                          </div>
+                          <div class="form-group">
+                             <label>Gambar</label>
+                             <input type="file" name="category_image" class="form-control" required>
+                         </div>
                          <button class="btn btn-primary float-right" type="submit">Simpan</button>
                      </form>
                  </div>
@@ -77,7 +85,7 @@
      </div>
  </div>
 @foreach ($editCategory as $category)
-       <form action="{{ route('category.update',$category->id) }}" method="POST">
+       <form action="{{ route('category.update',$category->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="modal fade" id="edit{{$category->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -93,6 +101,14 @@
                         <div class="form-group">
                             <label>Nama Kategori</label>
                             <input type="text" name="category_name" class="form-control" value="{{ $category->category_name }}" required>
+                        </div>
+                         <div class="form-group row">
+                           <div class="col-sm-4">
+                             <img src="{{ asset('storage/category/'.$category->category_image) }}" width="80px" alt="">
+                           </div>
+                            <div class="col-sm-8">
+                                <input type="file" name="category_image" class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

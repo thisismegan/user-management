@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -24,8 +25,17 @@ class CategoryController extends Controller
             'category_name' => 'required'
         ]);
 
+        $files = $request->file('category_image');
+
+        $name = explode('.', $files->hashName())[0];
+        $extension = strtolower($files->getClientOriginalExtension());
+        $image = $name . "." . $extension;
+
+        $files->storeAs('public/category', $image);
+
         Category::create([
-            'category_name' => $request->category_name
+            'category_name' => $request->category_name,
+            'category_image' => $image
         ]);
 
         return redirect()->route('category.index')->with('success', 'Berhasil menambahkan kategori');
@@ -35,9 +45,31 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
+        if ($request->hasFile('category_image')) {
+
+            Storage::delete('public/category/' . basename($category->category_image));
+
+            $files = $request->file('category_image');
+
+            $name = explode('.', $files->hashName())[0];
+            $extension = strtolower($files->getClientOriginalExtension());
+            $image = $name . "." . $extension;
+
+            $files->storeAs('public/category', $image);
+
+            $category->update([
+                'category_name' => $request->category_name,
+                'category_image' => $image
+
+            ]);
+
+            return redirect()->route('category.index')->with('success', 'Kategori berhasil di update');
+        }
+
         $category->update([
             'category_name' => $request->category_name
         ]);
+
 
         return redirect()->route('category.index')->with('success', 'Kategori berhasil di update');
     }
@@ -48,8 +80,14 @@ class CategoryController extends Controller
         if ($product > 0) {
             return redirect()->route('category.index')->with('failed', 'Tidak dapat hapus kategori, terdapat produk dengan kategori tersebut');
         }
-        //delete kategori
-        Category::find($request->category_id)->delete();
+
+        $category = Category::find($request->category_id);
+
+        //delete image category
+        Storage::delete('public/category/' . basename($category->category_image));
+
+        //delte category from database
+        $category->delete();
         return redirect()->route('category.index')->with('success', 'Kategori berhasil dihapus');
     }
 }

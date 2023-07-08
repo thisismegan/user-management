@@ -21,9 +21,16 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt($creadentials)) {
             $request->session()->put('email', Auth::user()->email);
-            return redirect('dashboard');
+            return redirect()->route('dashboard');
         } else {
             return redirect('/')->with('failed', 'Email atau password salah');
         }
+    }
+
+    public function destroy()
+    {
+        Auth::logout();
+
+        return redirect('/');
     }
 }

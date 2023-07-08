@@ -39,13 +39,14 @@
                              </tr>
                          </thead>
                          <tbody>
+                        <?php $i=1; ?>
                         @foreach ($products as $product)
                             <tr>
-                                 <th scope="row">1</th>
+                                 <th scope="row">{{ $i++ }}</th>
                                  <td>{{ $product->title }}</td>
                                  <td>{{ $product->category->category_name }}</td>
                                  <td> {{$product->stock}} </td>
-                                 <td> {{$product->price}} </td>
+                                 <td> Rp{{  number_format($product->price,'0',',','.') }} </td>
                                  <td>
                                   <div class="row">
                                       <a class="btn btn-primary btn-sm mx-2" href="{{ route('product.show',$product->id)}}"><i class="fas fa-list"></i></a>

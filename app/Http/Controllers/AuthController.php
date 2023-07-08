@@ -21,6 +21,9 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt($creadentials)) {
             $request->session()->put('email', Auth::user()->email);
+            if (Auth::user()->role_id == 3) {
+                return redirect()->route('home');
+            }
             return redirect()->route('dashboard');
         } else {
             return redirect('/')->with('failed', 'Email atau password salah');

@@ -10,7 +10,11 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\HomeController;
 
 // public routes
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/detail-product/{id}', [HomeController::class, 'detailProduct'])->name('detail-product');
+Route::get('search', [HomeController::class, 'search'])->name('search');
+
+
 Route::get('/login', [AuthController::class, 'index'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('register', [RegisterController::class, 'create'])->name('register-page');

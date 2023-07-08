@@ -39,6 +39,7 @@
              <div class="card card shadow mb-4">
                  <div class="card-body">
                     <div class="card-titel">{{ $product->title }}</div>
+                    <div class="card-titel"><b>Rp{{ number_format($product->price,0,',','.') }}</b></div>
                     <span class="badge badge-primary"> {{$product->category_name}} </span>
                     <p>Stok ✅: {{ $product->stock }}</p>
                     <p> {{$product->description}} </p>

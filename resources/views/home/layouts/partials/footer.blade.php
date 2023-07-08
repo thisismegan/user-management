@@ -1,9 +1,10 @@
-  <!-- Information start -->
-    <section>
+ <hr>
+ <!-- Information start -->
+    <section class="mt-5">
         <div class="container">
             <div class="row justify-content-start">
                 <div class="col">
-                    <img src="assets/img/logo.png" height="60" alt="">
+                    <img src="{{ asset('storage/logo.png') }}" height="60" alt="">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam maxime cum quibusdam odit. Libero
                         sapiente alias dolorum pariatur reiciendis deleniti, sit assumenda ipsum tenetur! Facere,
                         consequuntur. Porro esse enim ab.</p>
@@ -22,9 +23,9 @@
                     <li>Lacak Pesanan</li>
                     <li>Pembatalan Transaksi</li>
                 </div>
-                <div class="col">
+                <div class="col text-center">
                     <h5>Metode Pembayaran</h5>
-                    <img src="assets/img/payment.jpg" height="200" alt="">
+                    <img src="{{ asset('storage/metode_pembayaran.png') }}" width="250px" alt="">
                 </div>
             </div>
         </div>
@@ -36,7 +37,7 @@
         <div class="container">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                 <div class="col-md-4 d-flex align-items-center">
-                    <span class="mb-3 mb-md-0 text-body-secondary">&copy; iStuff</span>
+                    <span class="mb-3 mb-md-0 text-body-secondary">&copy; Ecommerce</span>
                 </div>
                 <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                     <li class="ms-3"><a class="text-body-secondary" href="#"><svg xmlns="http://www.w3.org/2000/svg"

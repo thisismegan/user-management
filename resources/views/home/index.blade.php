@@ -1,6 +1,33 @@
   @extends('home.layouts.main')
-  <!-- carousel-->
   @section('content')
+
+  @if(request('search'))
+ <section>
+         <div class="container" style="margin-top: 100px">
+            <h4>Pencarian untuk produk: {{ request('search') }}</h4>
+            <div class="row">
+                <?php foreach ($products->get() as $product) : ?>
+                    <div class="col-lg-2 col-md-6 col-sm-2 mb-3">
+                        <a href="{{ route('detail-product',$product->id) }}" style="text-decoration:none">
+                            <div class="card card-product" style="width: 10rem;">
+                                <img src="{{ asset('storage/product/'.$product->image[0]['image_name']) }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ substr($product->title,0, 30) }}</h6>
+                                    <h6 class="card-text"><b>Rp{{ number_format($product->price,0,',','.') }}</b></h6>
+                                    <div class="rating">
+                                        <small>⭐ 4.8 | Terjual 500+</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="mt-4 text-center"><button class="btn btn-outline-dark">Muat lebih banyak</button></div>
+        </div>
+    </section>
+
+  @else
   <section>
         <div id="carouselExample" class="carousel slide jumbotron-slide">
             <div class="container">
@@ -21,13 +48,13 @@
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="next">
+                data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
-    </section>
+</section>
 
     <!-- category -->
     <section>
@@ -37,36 +64,13 @@
                     <h4>Kategori</h4>
                 </div>
                 <div class="row align-items-start">
+                    @foreach ($categories as $category)
                     <div class="col">
                         <div class="card" style="width: 10rem;">
-                            <img src="assets/img/category (1).png" class="card-img-top" alt="...">
+                            <img src="{{ asset('storage/category/'.$category->category_image) }}" class="card-img-top" alt="...">
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 10rem;">
-                            <img src="assets/img/category (2).png" class="card-img-top" alt="...">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 10rem;">
-                            <img src="assets/img/category (3).png" class="card-img-top" alt="...">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 10rem;">
-                            <img src="assets/img/category (4).png" class="card-img-top" alt="...">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 10rem;">
-                            <img src="assets/img/category (5).png" class="card-img-top" alt="...">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 10rem;">
-                            <img src="assets/img/category (6).png" class="card-img-top" alt="...">
-                        </div>
-                    </div>
+                    </div>    
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -82,7 +86,7 @@
                     <div class="col">
                         <a href="/detail_produk.html" style="text-decoration: none;">
                             <div class="card" style="width: 10rem;">
-                                <img src="assets/img/macbook-pro.jpg" class="card-img-top" alt="...">
+                                <img src="{{ asset('storage/product/sample/product_terlaris1.jpg') }}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <span class="badge bg-dark">Terlaris</span>
                                     <h6 class="card-title">Macbook Pro</h6>
@@ -96,7 +100,7 @@
                     </div>
                     <div class="col">
                         <div class="card" style="width: 10rem;">
-                            <img src="assets/img/macbook-air.jpg" class="card-img-top" alt="...">
+                            <img src="{{ asset('storage/product/sample/product_terlaris2.png') }}   " class="card-img-top" alt="...">
                             <div class="card-body">
                                 <span class="badge bg-dark">Terlaris</span>
                                 <h6 class="card-title">Macbook Air</h6>
@@ -109,7 +113,7 @@
                     </div>
                     <div class="col">
                         <div class="card" style="width: 10rem;">
-                            <img src="assets/img/iphone-14-pro.jpg" class="card-img-top" alt="...">
+                            <img src="{{ asset('storage/product/sample/product_terlaris3.png') }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <span class="badge bg-dark">Terlaris</span>
                                 <h6 class="card-title">iPhone 14 Pro</h6>
@@ -122,7 +126,7 @@
                     </div>
                     <div class="col">
                         <div class="card" style="width: 10rem;">
-                            <img src="assets/img/ipad-mini.jpg" class="card-img-top" alt="...">
+                            <img src="{{ asset('storage/product/sample/product_terlaris4.png') }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <span class="badge bg-dark">Terlaris</span>
                                 <h6 class="card-title">iPad Mini</h6>
@@ -135,7 +139,7 @@
                     </div>
                     <div class="col">
                         <div class="card" style="width: 10rem;">
-                            <img src="assets/img/smart-watch.webp" class="card-img-top" alt="...">
+                            <img src="{{ asset('storage/product/sample/product_terlaris5.jpg') }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <span class="badge bg-dark">Terlaris</span>
                                 <h6 class="card-title">Smart Watch</h6>
@@ -148,7 +152,7 @@
                     </div>
                     <div class="col">
                         <div class="card" style="width: 10rem;">
-                            <img src="assets/img/imac.jpg" class="card-img-top" alt="...">
+                            <img src="{{ asset('storage/product/sample/product_terlaris6.jpg') }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <span class="badge bg-dark">Terlaris</span>
                                 <h6 class="card-title">iMac</h6>
@@ -167,86 +171,28 @@
     <hr class="line-break-product">
     <!-- product pilihan -->
     <section>
-        <div class="container">
-            <div class="card-title">
-                <h4>Produk Pilihan</h4>
-                <div class="row align-items-start">
-                    <div class="col">
-                        <div class="card card-product" style="width: 10rem;">
-                            <img src="assets/img/airpods.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">AirPods Max</h6>
-                                <h6 class="card-text"><b>Rp9.000.000</b></h6>
-                                <div class="rating">
-                                    <small>⭐ 4.8 | Terjual 500+</small>
+         <div class="container mt-4">
+            <h4>Produk Pilihan</h4>
+            <div class="row">
+                <?php foreach ($products->get() as $product) : ?>
+                    <div class="col-lg-2 col-md-6 col-sm-2 mb-3">
+                        <a href="{{ route('detail-product',$product->id) }}" style="text-decoration:none">
+                            <div class="card card-product" style="width: 10rem;">
+                                <img src="{{ asset('storage/product/'.$product->image[0]['image_name']) }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ substr($product->title,0, 30) }}</h6>
+                                    <h6 class="card-text"><b>Rp{{ number_format($product->price,0,',','.') }}</b></h6>
+                                    <div class="rating">
+                                        <small>⭐ 4.8 | Terjual 500+</small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                    <div class="col">
-                        <div class="card card-product" style="width: 10rem;">
-                            <img src="assets/img/AirTag-Loop.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">AirTag Loop</h6>
-                                <h6 class="card-text"><b>Rp490.000</b></h6>
-                                <div class="rating">
-                                    <small>⭐ 4.9 | Terjual 900+</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card card-product" style="width: 10rem;">
-                            <img src="assets/img/leather-sleeve.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Leather Sleeve for 10,5inci iPad Pro</h6>
-                                <h6 class="card-text"><b>Rp600.000</b></h6>
-                                <div class="rating">
-                                    <small>⭐ 5.0 | Terjual 200+</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card card-product" style="width: 10rem;">
-                            <img src="assets/img/mac-studio.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Mac Studio</h6>
-                                <h6 class="card-text"><b>Rp33.000.000</b></h6>
-                                <div class="rating">
-                                    <small>⭐ 4.9 | Terjual 20</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card card-product" style="width: 10rem;">
-                            <img src="assets/img/air-tag-pack.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">AirTag (4 Pack)</h6>
-                                <h6 class="card-text"><b>Rp1.400.000</b></h6>
-                                <div class="rating">
-                                    <small>⭐ 4.9 | Terjual 100+</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card card-product" style="width: 10rem;">
-                            <img src="assets/img/iPad-gen-5.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">iPad Air 5th Gen 10.9 inci</h6>
-                                <h6 class="card-text"><b>Rp10.000.000</b></h6>
-                                <div class="rating">
-                                    <small>⭐ 4.9 | Terjual 200+</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-4 text-center"><button class="btn btn-outline-dark">Muat lebih banyak</button></div>
-                <hr>
+                <?php endforeach; ?>
             </div>
+            <div class="mt-4 text-center"><button class="btn btn-outline-dark">Muat lebih banyak</button></div>
         </div>
     </section>
+    @endif
   @endsection

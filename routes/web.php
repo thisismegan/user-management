@@ -13,10 +13,12 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/detail-product/{id}', [HomeController::class, 'detailProduct'])->name('detail-product');
 Route::get('search', [HomeController::class, 'search'])->name('search');
-Route::get('/login', [AuthController::class, 'index'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('register', [AuthController::class, 'register'])->name('register-page');
 Route::post('register', [AuthController::class, 'store'])->name('register');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'index'])->name('login-page');
+    Route::get('register', [AuthController::class, 'register'])->name('register-page');
+});
 
 // protected routes customer
 Route::middleware('auth')->group(function () {

@@ -12,7 +12,6 @@ class AuthController extends Controller
 {
     public function index()
     {
-
         return view('auth/login');
     }
 
@@ -23,7 +22,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
         if (Auth::attempt($creadentials)) {
-            $request->session()->put('email', Auth::user()->email);
+            $request->session()->regenerate();
             if (Auth::user()->role_id == 3) {
                 return redirect()->route('home');
             }
@@ -59,10 +58,14 @@ class AuthController extends Controller
         return redirect()->route('login-page')->with('success', 'akun telah di buat. silahkan login');
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
         Auth::logout();
 
-        return redirect('/');
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
 }
